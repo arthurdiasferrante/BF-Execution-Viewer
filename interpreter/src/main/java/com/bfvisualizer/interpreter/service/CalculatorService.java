@@ -24,6 +24,7 @@ public class CalculatorService {
     }
 
     public CalculatorResponseDTO calculate(int n1, int n2, String operation) throws IOException {
+        validateInput(n1, n2, operation);
         String bfCode = "";
 
         bfCode = injectNumber(bfCode, n1);
@@ -44,6 +45,21 @@ public class CalculatorService {
             sb.append("+".repeat(digit)).append(">");
         }
         return sb.toString();
+    }
+
+    private void validateInput(int n1, int n2, String operation) {
+        validateNumber(n1, "num1");
+        validateNumber(n2, "num2");
+
+        if (operation == null || operation.isBlank()) {
+            throw new IllegalArgumentException("operation nao pode ser vazia");
+        }
+    }
+
+    private void validateNumber(int value, String fieldName) {
+        if (value < 0 || value > 99999999) {
+            throw new IllegalArgumentException(fieldName + " deve estar entre 0 e 99999999");
+        }
     }
 
     public String appendOperation(String currentBfCode, String operation) throws IOException {

@@ -24,6 +24,10 @@ public class CalculatorController {
 
     @PostMapping
     public ResponseEntity<CalculatorResponseDTO> createOperation(@RequestBody CalculatorRequestDTO requestDTO) throws IOException {
+        if (requestDTO == null) {
+            throw new IllegalArgumentException("Request body cannot be null");
+        }
+
         CalculatorResponseDTO responseDTO = service.calculate(requestDTO.num1(), requestDTO.num2(), requestDTO.operation());
 
         return ResponseEntity.ok(responseDTO);
