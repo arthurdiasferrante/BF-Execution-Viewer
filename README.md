@@ -1,8 +1,8 @@
-# Brainfuck Visualizer API
+# Brainf*ck Visualizer API
 
-Java 21 + Spring Boot backend for Brainfuck execution with step-by-step state snapshots.
+Java 21 + Spring Boot backend for Brainf*ck execution with step-by-step state snapshots.
 
-This project exposes HTTP endpoints that run Brainfuck code and return execution data designed for front-end visualization (memory snapshots, pointer position, output, and generated BF code).
+This project exposes HTTP endpoints that run Brainf*ck code and return execution data designed for front-end visualization (memory snapshots, pointer position, output, and generated BF code).
 
 ## Tech Stack
 
@@ -14,8 +14,8 @@ This project exposes HTTP endpoints that run Brainfuck code and return execution
 
 ## What It Provides
 
-- Raw Brainfuck execution through REST
-- Calculator operations implemented through Brainfuck scripts
+- Raw Brainf*ck execution through REST
+- Calculator operations implemented through Brainf*ck scripts
 - Frame-by-frame memory snapshots for replay/visualization
 - Stateless service behavior suitable for concurrent requests
 
@@ -23,7 +23,7 @@ This project exposes HTTP endpoints that run Brainfuck code and return execution
 
 ### `POST /api/execute`
 
-Executes raw Brainfuck code.
+Executes raw Brainf*ck code.
 
 **Request body**
 
@@ -51,7 +51,7 @@ Executes raw Brainfuck code.
 
 ### `POST /calculator`
 
-Builds and executes a Brainfuck program for a selected operation.
+Builds and executes a Brainf*ck program for a selected operation.
 
 **Request body**
 
@@ -69,7 +69,7 @@ Builds and executes a Brainfuck program for a selected operation.
 - `service/` execution and orchestration logic
 - `mapper/` DTO mapping (`MapStruct`)
 - `model/` execution frame model
-- `resources/scripts/` Brainfuck operation scripts
+- `resources/scripts/` Brainf*ck operation scripts
 
 ## Run Locally
 
