@@ -1,24 +1,31 @@
 # Brainfuck Visualizer API
 
-Backend em Java 21 + Spring Boot para executar Brainfuck e retornar frames de execucao para visualizacao no front-end.
+Java 21 + Spring Boot backend for Brainfuck execution with step-by-step state snapshots.
 
-## Stack
+This project exposes HTTP endpoints that run Brainfuck code and return execution data designed for front-end visualization (memory snapshots, pointer position, output, and generated BF code).
+
+## Tech Stack
 
 - Java 21
 - Spring Boot 4.x
-- Maven
+- Maven Wrapper
 - MapStruct
+- Lombok
 
-## Endpoints
+## What It Provides
 
-- `POST /api/execute`
-  - Executa codigo Brainfuck enviado no corpo da requisicao.
-- `POST /calculator`
-  - Monta e executa um script Brainfuck de operacao matematica.
+- Raw Brainfuck execution through REST
+- Calculator operations implemented through Brainfuck scripts
+- Frame-by-frame memory snapshots for replay/visualization
+- Stateless service behavior suitable for concurrent requests
 
-## Exemplo de request
+## API Endpoints
 
-`POST /api/execute`
+### `POST /api/execute`
+
+Executes raw Brainfuck code.
+
+**Request body**
 
 ```json
 {
@@ -27,32 +34,71 @@ Backend em Java 21 + Spring Boot para executar Brainfuck e retornar frames de ex
 }
 ```
 
-## Rodando localmente
+**Response shape**
 
-Windows (PowerShell):
+```json
+{
+  "finalOutput": "A",
+  "frames": [
+    {
+      "memorySnapshot": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "dataPointer": 0
+    }
+  ],
+  "generatedBfCode": "++++++++[>++++++++<-]>+."
+}
+```
+
+### `POST /calculator`
+
+Builds and executes a Brainfuck program for a selected operation.
+
+**Request body**
+
+```json
+{
+  "num1": 12,
+  "num2": 7,
+  "operation": "soma"
+}
+```
+
+## Project Structure
+
+- `controller/` HTTP API layer
+- `service/` execution and orchestration logic
+- `mapper/` DTO mapping (`MapStruct`)
+- `model/` execution frame model
+- `resources/scripts/` Brainfuck operation scripts
+
+## Run Locally
+
+### Windows (PowerShell)
 
 ```powershell
 cd interpreter
 .\mvnw.cmd spring-boot:run
 ```
 
-Linux/macOS:
+### Linux/macOS
 
 ```bash
 cd interpreter
 ./mvnw spring-boot:run
 ```
 
-## Testes
+Default URL: `http://localhost:8080`
 
-Windows:
+## Run Tests
+
+### Windows
 
 ```powershell
 cd interpreter
 .\mvnw.cmd test
 ```
 
-Linux/macOS:
+### Linux/macOS
 
 ```bash
 cd interpreter
